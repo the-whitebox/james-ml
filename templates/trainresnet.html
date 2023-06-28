@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YOLOv5 Training</title>
+    <style>
+      .container {
+        display: flex;
+        align-items: center;
+      }
+
+      .image-box {
+        margin-right: 20px;
+      }
+      body {
+        background-image: url("{{ url_for('static', filename='background.jpg') }}");
+        width: 100%;
+        height: auto;
+        background-size: cover;
+      }
+      h1,
+      h2,
+      input {
+        color: rgb(221, 221, 221);
+      }
+      .button,
+      input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 45px;
+        padding: 5px;
+        margin: 5px;
+        background-color: darkgray;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-size: medium;
+        font-family: "Courier New", Courier, monospace;
+        font-weight: 700;
+      }
+      input {
+        width: 250px;
+      }
+      .button {
+        height: 58px;
+      }
+      .button:hover,
+      input:hover {
+        background-color: rgb(255, 251, 251);
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+        border: 2px solid rgb(21, 255, 0);
+      }
+      p {
+        color: rgb(221, 221, 221);
+        font-size: large;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-weight: 600;
+      }
+      .inside-form {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Resnet Training</h1>
+    <form
+      class="container"
+      method="POST"
+      enctype="multipart/form-data"
+      action="/detect"
+    >
+      <div class=".inside-form">
+        <p>Provide the path to the images</p>
+        <input type="file" name="image" webkitdirectory directory multiple />
+      </div>
+      <div class=".inside-form">
+        <p>Provide the path to the labels</p>
+        <input type="file" name="image" webkitdirectory directory multiple />
+      </div>
+      <button class="button" type="submit">Train</button>
+    </form>
+  </body>
+</html>

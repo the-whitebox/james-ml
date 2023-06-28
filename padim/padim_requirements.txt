@@ -1,0 +1,5 @@
+torch
+pytorch_lightning
+anomalib
+openvino
+flask

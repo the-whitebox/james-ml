@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YOLOv5 Detection</title>
+    <style>
+      .container {
+        display: flex;
+        align-items: center;
+      }
+
+      .image-box {
+        margin-right: 20px;
+      }
+      body {
+        background-image: url("{{ url_for('static', filename='background.jpg') }}");
+        width: 100%;
+        height: auto;
+        background-size: cover;
+      }
+      h1,
+      h2,
+      input,
+      p {
+        color: rgb(221, 221, 221);
+      }
+      .button,
+      input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 45px;
+        padding: 5px;
+        margin: 5px;
+        background-color: darkgray;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-size: medium;
+        font-family: "Courier New", Courier, monospace;
+        font-weight: 700;
+      }
+      input {
+        width: 250px;
+      }
+      .button {
+        height: 58px;
+      }
+      .button:hover,
+      input:hover {
+        background-color: rgb(255, 251, 251);
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+        border: 2px solid rgb(21, 255, 0);
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function handleImageError(element) {
+        element.style.display = "none";
+        element.style.color = "white";
+        var errorText = document.createElement("p");
+        errorText.textContent = "No image available";
+        element.parentNode.insertBefore(errorText, element.nextSibling);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>YOLOv5 Detection</h1>
+    <form
+      class="container"
+      method="POST"
+      enctype="multipart/form-data"
+      action="/detect"
+    >
+      <input type="file" name="image" accept="image/*" />
+      <button class="button" type="submit">Detect</button>
+    </form>
+
+    <div class="container">
+      <div class="image-box">
+        <h2>Original Image</h2>
+        <img
+          src="{{ url_for('static', filename='yolov5/original/image.jpeg') }}"
+          alt="Original Image"
+          width="100%"
+          onerror="handleImageError(this)"
+        />
+      </div>
+
+      <div class="image-box">
+        <h2>Detection Results</h2>
+        <img
+          src="{{ url_for('static', filename='yolov5/processed/image.jpeg') }}"
+          alt="Processed Image"
+          width="100%"
+          onerror="handleImageError(this)"
+        />
+      </div>
+    </div>
+  </body>
+</html>

@@ -101,7 +101,7 @@ def home():
 def launch_label_studio():
     
     try:
-        detect_resnet = requests.post("http://localhost:5024/launch_label_studio")
+        detect_resnet = requests.post("http://localhost:5023/launch_label_studio")
         return "Label Studio is Launching!"
     except Exception as e:
         raise ValueError(e)
@@ -267,6 +267,16 @@ def train_padim():
     if request.method == 'POST':
         try:
             train_yolo = requests.post("http://localhost:5009/train_padim")
+        except Exception as e:
+            raise ValueError(e)
+        return render_template('trainpadim.html')
+
+# 
+@app.route('/test_trained_padim', methods=['POST'])
+def test_trained_padim():
+    if request.method == 'POST':
+        try:
+            train_yolo = requests.post("http://localhost:5009/test_trained_padim1")
         except Exception as e:
             raise ValueError(e)
         return render_template('trainpadim.html')

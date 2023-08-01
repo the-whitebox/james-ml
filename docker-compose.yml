@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  resnet:
+    build:
+      context: ./resnet
+    ports:
+      - "5024:5024"
+
+  labelstudio:
+    build:
+      context: ./labelstudio
+    ports:
+      - "5023:5023"
+
+  padim:
+    build:
+      context: ./padim
+    ports:
+      - "5012:5012"
+
+  train_yolo:
+    build:
+      context: ./train_yolo
+    ports:
+      - "5005:5005"
+
+  train_padim:
+    build:
+      context: ./train_padim
+    ports:
+      - "5009:5009"
+
+  root_app:
+    build:
+      context: .
+    ports:
+      - "5000:5000"

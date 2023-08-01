@@ -3,3 +3,6 @@ pytorch_lightning
 anomalib
 openvino
 flask
+onnx
+# gradio
+onnxruntime

@@ -15,4 +15,4 @@ def launch_label_studio():
 
 if __name__ == "__main__":
 
-    app.run(debug=True, host='localhost', port=5024)
+    app.run(debug=True, host="0.0.0.0")

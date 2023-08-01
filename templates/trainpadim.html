@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>YOLOv5 Training</title>
+    <title>Padim Training</title>
     <style>
       .container {
         display: flex;
@@ -72,15 +72,94 @@
       enctype="multipart/form-data"
       action="/train_padim"
     >
-      <!-- <div class=".inside-form">
-        <p>Provide the path to the images</p>
-        <input type="file" name="image" webkitdirectory directory multiple />
-      </div>
-      <div class=".inside-form">
-        <p>Provide the path to the labels</p>
-        <input type="file" name="image" webkitdirectory directory multiple />
-      </div> -->
       <button class="button" type="submit">Train</button>
     </form>
+
+    <form
+      class="container"
+      method="POST"
+      enctype="multipart/form-data"
+      action="/test_trained_padim1"
+    >
+      <div class="inside-form">
+        <!-- Input field for image upload -->
+        <input type="file" name="image" accept="image/*" required />
+
+        <!-- Button to submit the form and trigger inference -->
+        <button class="button" type="submit">Test the Model</button>
+      </div>
+    </form>
+
+    <!-- Section to display inference results -->
+    <div class="container">
+      <div class="image-box">
+        <!-- Display the uploaded image here (optional) -->
+        <img
+          id="uploaded-image"
+          src=""
+          alt="Uploaded Image"
+          width="256"
+          height="256"
+        />
+      </div>
+      <div class="image-box">
+        <!-- Display the predicted heat map here (optional) -->
+        <img id="heat-map" src="" alt="Heat Map" width="256" height="256" />
+
+        <!-- Display the predicted mask here (optional) -->
+        <img
+          id="pred-mask"
+          src=""
+          alt="Predicted Mask"
+          width="256"
+          height="256"
+        />
+
+        <!-- Display the segmentation result here (optional) -->
+        <img
+          id="segmentation-result"
+          src=""
+          alt="Segmentation Result"
+          width="256"
+          height="256"
+        />
+      </div>
+    </div>
+
+    <!-- JavaScript code to update the image sources after inference (optional) -->
+    <script>
+      // Your JavaScript code (if any) for the existing functionality
+      // ...
+
+      const form = document.querySelector("form");
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+
+        // Make a POST request to the Flask app for inference
+        const response = await fetch("/test_trained_padim1", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          // Parse the JSON response
+          const data = await response.json();
+
+          // Update the image sources based on the inference results
+          document.getElementById("uploaded-image").src = URL.createObjectURL(
+            formData.get("image")
+          );
+          document.getElementById("heat-map").src =
+            "data:image/jpeg;base64," + data.heat_map;
+          document.getElementById("pred-mask").src =
+            "data:image/jpeg;base64," + data.pred_mask;
+          document.getElementById("segmentation-result").src =
+            "data:image/jpeg;base64," + data.segmentation_result;
+        } else {
+          console.error("Error occurred during inference.");
+        }
+      });
+    </script>
   </body>
 </html>

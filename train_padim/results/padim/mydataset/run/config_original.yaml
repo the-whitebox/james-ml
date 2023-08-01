@@ -4,8 +4,8 @@ dataset:
   eval_batch_size: 32
   format: folder
   image_size: 256
-  normal_dir: train/good
-  abnormal_dir: train/bad
+  normal_dir: ../dataset/good
+  abnormal_dir: ../dataset/bad
   normal_test_dir: null
   mask_dir: null
   extensions: null
@@ -13,7 +13,7 @@ dataset:
   normalization: imagenet
   num_workers: 8
   root: ./dataset
-  task: segmentation
+  task: classification
   test_split_mode: from_dir
   test_split_ratio: 0.2
   tiling:
